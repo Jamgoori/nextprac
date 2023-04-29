@@ -1,5 +1,6 @@
 import { getProduct, getProducts } from "@/service/products";
-import Link from "next/link";
+
+export const revalidate = 3;
 
 type Props = {
   params: {
@@ -12,7 +13,7 @@ export function generateMetadata({ params }: Props) {
     title: `제품의 이름: ${params.slug}`,
   };
 }
-
+// 전체데이터 말고, 현재 slug페이지에서 필요한 데이터만 받아온다. 마찬가지로 데이터를 불러오기때문에 비동기로 처리한다.
 export default async function Productpage({ params: { slug } }: Props) {
   const product = await getProduct(slug);
 
